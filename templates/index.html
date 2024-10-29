@@ -2,28 +2,125 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversion Tool</title>
+    <style>
+        /* Resetting default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Center the container */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 1em;  /* Padding to avoid screen edges on mobile */
+        }
+
+        /* Style the container */
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 2em 1.5em;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Heading style */
+        h1 {
+            color: #4a90e2;
+            margin-bottom: 1em;
+            font-size: 1.6em;
+        }
+
+        /* Style the form elements */
+        label {
+            display: block;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            color: #555;
+            font-size: 1em;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.8em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.8em;
+            background-color: #4a90e2;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357ab8;
+        }
+
+        /* Style the result output */
+        .result {
+            margin-top: 1.5em;
+            font-size: 1.2em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.4em;
+            }
+
+            input[type="number"],
+            select,
+            button {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Conversion Tool</h1>
-    
-    <form method="post">
-        <label for="value">Enter Value:</label>
-        <input type="number" name="value" step="any" required>
+    <div class="container">
+        <h1>Unit Converter</h1>
         
-        <label for="conversion_type">Choose Conversion:</label>
-        <select name="conversion_type" required>
-            <option value="pounds_to_kg">Pounds to Kilograms</option>
-            <option value="kg_to_pounds">Kilograms to Pounds</option>
-            <option value="mph_min_pr_k">Miles/Hour to Min/Km</option>
-            <option value="min_pr_k_mph">Min/Km to Miles/Hour</option>
-        </select>
+        <form method="post">
+            <label for="value">Enter Value:</label>
+            <input type="number" name="value" step="any" required>
+            
+            <label for="conversion_type">Choose Conversion:</label>
+            <select name="conversion_type" required>
+                <option value="pounds_to_kg">Pounds to Kilograms</option>
+                <option value="kg_to_pounds">Kilograms to Pounds</option>
+                <option value="mph_to_min_sec_per_km">Miles per Hour to Min/Km</option>
+            </select>
+            
+            <button type="submit">Convert</button>
+        </form>
         
-        <button type="submit">Convert</button>
-    </form>
-    
-    {% if result %}
-        <p><strong>Result:</strong> {{ result }}</p>
-    {% endif %}
+        {% if result %}
+            <p class="result">{{ result }}</p>
+        {% endif %}
+    </div>
 </body>
 </html>
