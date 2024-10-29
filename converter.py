@@ -13,7 +13,10 @@ def min_per_km_mph(minPrKm):
     mph = km_per_hour / 1.60934
     return round(mph,1)
 
-
+def pounds_to_kg(pounds):
+    kg = pounds * 0.453592
+    return kg
 
 print(mph_min_per_km(8.7))
 print(min_per_km_mph(4.17))
+print(pounds_to_kg(225))
