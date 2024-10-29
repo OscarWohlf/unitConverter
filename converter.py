@@ -17,6 +17,11 @@ def pounds_to_kg(pounds):
     kg = pounds * 0.453592
     return kg
 
+def kg_to_pounds(kg):
+    pounds = kg / 0.453592
+    return pounds
+
 print(mph_min_per_km(8.7))
 print(min_per_km_mph(4.17))
 print(pounds_to_kg(225))
+print(kg_to_pounds(102.0582))
