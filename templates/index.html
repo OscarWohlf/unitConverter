@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversion Tool</title>
+</head>
+<body>
+    <h1>Conversion Tool</h1>
+    
+    <form method="post">
+        <label for="value">Enter Value:</label>
+        <input type="number" name="value" step="any" required>
+        
+        <label for="conversion_type">Choose Conversion:</label>
+        <select name="conversion_type" required>
+            <option value="pounds_to_kg">Pounds to Kilograms</option>
+            <option value="kg_to_pounds">Kilograms to Pounds</option>
+            <option value="mph_min_pr_k">Miles/Hour to Min/Km</option>
+            <option value="min_pr_k_mph">Min/Km to Miles/Hour</option>
+        </select>
+        
+        <button type="submit">Convert</button>
+    </form>
+    
+    {% if result %}
+        <p><strong>Result:</strong> {{ result }}</p>
+    {% endif %}
+</body>
+</html>

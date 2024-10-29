@@ -1,3 +1,7 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
 def mph_min_per_km(mph):
     km_per_hour = mph * 1.60934
     min_per_km = 60 / km_per_hour
@@ -21,7 +25,23 @@ def kg_to_pounds(kg):
     pounds = kg / 0.453592
     return pounds
 
-print(mph_min_per_km(8.7))
-print(min_per_km_mph(4.17))
-print(pounds_to_kg(225))
-print(kg_to_pounds(102.0582))
+@app.route("/", methods=["GET", "POST"])
+def index():
+    result = None
+    if request.method == "POST":
+        conversion_type = request.form["conversion_type"]
+        value = float(request.form["value"])
+
+        if conversion_type == "mph_min_pr_k":
+            result = mph_min_per_km(value)
+        elif conversion_type == "min_pr_k_mph":
+            result = min_per_km_mph(value)
+        elif conversion_type == "pounds_to_kg":
+            result = pounds_to_kg(value)
+        elif conversion_type == "kg_to_pounds":
+            result = kg_to_pounds(value)
+
+    return render_template("index.html",result= result)
+
+if __name__ == "__main__":
+    app.run(debug=True)
