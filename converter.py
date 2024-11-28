@@ -24,12 +24,18 @@ def min_per_km_mph(minPrKm):
     mph = km_per_hour / 1.60934
     return round(mph, 1)
 
+def fahr_to_cels(temp):
+    return round((temp - 32)*(5/9),1)
+
+def cels_to_fahr(temp):
+    return round((temp*9/5) + 32,1)
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     result = None
     value = ""
     conversion_type = ""
-    
+
     if request.method == "POST":
         conversion_type = request.form.get("conversion_type","")
         value = request.form.get("value","")
@@ -44,7 +50,11 @@ def index():
                 result = f"{value} mph is {mph_to_min_sec_per_km(value)} per km"
             elif conversion_type == "min_per_km_mph":
                 result = f"{value} min/km is {min_per_km_mph(value)} mph"
-    
+            elif conversion_type == "fahrenheit_to_celsius":
+                result = f"{value} fahrenheit is {fahr_to_cels(value)} celsius"
+            elif conversion_type == "celsius_to_fahrenheit":
+                result = f"{value} celsius is {cels_to_fahr(value)} fahrenheit"
+
     return render_template("index.html", value=value, conversion_type=conversion_type, result=result)
 
 if __name__ == "__main__":
