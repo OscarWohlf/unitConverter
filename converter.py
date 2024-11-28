@@ -27,20 +27,25 @@ def min_per_km_mph(minPrKm):
 @app.route("/", methods=["GET", "POST"])
 def index():
     result = None
-    if request.method == "POST":
-        conversion_type = request.form["conversion_type"]
-        value = float(request.form["value"])
-        
-        if conversion_type == "pounds_to_kg":
-            result = f"{value} pounds is {pounds_to_kg(value):.2f} kg"
-        elif conversion_type == "kg_to_pounds":
-            result = f"{value} kg is {kg_to_pounds(value):.2f} pounds"
-        elif conversion_type == "mph_to_min_sec_per_km":
-            result = f"{value} mph is {mph_to_min_sec_per_km(value)} per km"
-        elif conversion_type == "min_per_km_mph":
-            result = f"{value} min/km is {min_per_km_mph(value)} mph"
+    value = ""
+    conversion_type = ""
     
-    return render_template("index.html", result=result)
+    if request.method == "POST":
+        conversion_type = request.form.get("conversion_type","")
+        value = request.form.get("value","")
+
+        if value: 
+            value = float(value)
+            if conversion_type == "pounds_to_kg":
+                result = f"{value} pounds is {pounds_to_kg(value):.2f} kg"
+            elif conversion_type == "kg_to_pounds":
+                result = f"{value} kg is {kg_to_pounds(value):.2f} pounds"
+            elif conversion_type == "mph_to_min_sec_per_km":
+                result = f"{value} mph is {mph_to_min_sec_per_km(value)} per km"
+            elif conversion_type == "min_per_km_mph":
+                result = f"{value} min/km is {min_per_km_mph(value)} mph"
+    
+    return render_template("index.html", value=value, conversion_type=conversion_type, result=result)
 
 if __name__ == "__main__":
     app.run(debug=True)
